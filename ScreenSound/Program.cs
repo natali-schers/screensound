@@ -1,8 +1,33 @@
-﻿using ScreenSound.Menus;
+﻿using Microsoft.Data.SqlClient;
+using ScreenSound.Banco;
+using ScreenSound.Menus;
 using ScreenSound.Modelos;
 
-Artista ira = new Artista("Ira!", "Banda Ira!");
-Artista beatles = new("The Beatles", "Banda The Beatles");
+try
+{
+    var artistaDAL = new ArtistaDAL();
+
+    Artista novoArtista = new Artista("Ira!", "Banda Ira!", "banda-ira.jpg");
+
+    artistaDAL.Adicionar(novoArtista);
+
+    var listaArtistas = artistaDAL.Listar();
+
+    foreach (var artista in listaArtistas)
+    {
+        Console.WriteLine($"ID: {artista.Id} - Nome: {artista.Nome} - Bio: {artista.Bio} - FotoPerfil: {artista.FotoPerfil}");
+    }
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Erro ao conectar ao banco de dados: {ex.Message}");
+    throw;
+}
+
+return;
+
+Artista ira = new Artista("Ira!", "Banda Ira!", "banda-ira.jpg");
+Artista beatles = new("The Beatles", "Banda The Beatles", "the-beatles.jpg");
 
 Dictionary<string, Artista> artistasRegistrados = new();
 artistasRegistrados.Add(ira.Nome, ira);
