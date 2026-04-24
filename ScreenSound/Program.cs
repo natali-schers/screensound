@@ -5,17 +5,18 @@ using ScreenSound.Modelos;
 
 try
 {
-    var artistaDAL = new ArtistaDAL();
+    var contexto = new ScreenSoundContext();
+    var artistaDAL = new ArtistaDAL(contexto);
 
-    Artista novoArtista = new Artista("Ira!", "Banda Ira!", "banda-ira.jpg");
+    var novoArtista = new Artista("Lana Del Rey", "Cantora Lana Del Rey", "lana-del-rey.jpg");
 
     artistaDAL.Adicionar(novoArtista);
 
-    var listaArtistas = artistaDAL.Listar();
+    var artistas = artistaDAL.Listar();
 
-    foreach (var artista in listaArtistas)
+    foreach (var artista in artistas)
     {
-        Console.WriteLine($"ID: {artista.Id} - Nome: {artista.Nome} - Bio: {artista.Bio} - FotoPerfil: {artista.FotoPerfil}");
+        Console.WriteLine($"Id: {artista.Id} - Nome: {artista.Nome}");
     }
 }
 catch (Exception ex)
