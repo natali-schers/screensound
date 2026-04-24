@@ -8,16 +8,19 @@ try
     var contexto = new ScreenSoundContext();
     var artistaDAL = new ArtistaDAL(contexto);
 
-    var novoArtista = new Artista("Lana Del Rey", "Cantora Lana Del Rey", "lana-del-rey.jpg");
+    //var novoArtista = new Artista("Lana Del Rey", "Cantora Lana Del Rey", "lana-del-rey.jpg");
 
-    artistaDAL.Adicionar(novoArtista);
+    //artistaDAL.Adicionar(novoArtista);
 
-    var artistas = artistaDAL.Listar();
+    //var artistas = artistaDAL.Listar();
 
-    foreach (var artista in artistas)
-    {
-        Console.WriteLine($"Id: {artista.Id} - Nome: {artista.Nome}");
-    }
+    //foreach (var artista in artistas)
+    //{
+    //    Console.WriteLine($"Id: {artista.Id} - Nome: {artista.Nome}");
+    //}
+
+    Console.WriteLine(artistaDAL.RecuperarPeloNome("Lana Del Rey"));
+    Console.WriteLine(artistaDAL.RecuperarPeloNome("Lady Gaga"));
 }
 catch (Exception ex)
 {

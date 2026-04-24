@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using ScreenSound.Modelos;
 
 namespace ScreenSound.Banco
@@ -38,6 +39,11 @@ namespace ScreenSound.Banco
                 _contexto.Artistas.Remove(artista);
                 _contexto.SaveChanges();
             }
+        }
+
+        public Artista? RecuperarPeloNome(string nome)
+        {
+            return _contexto.Artistas.FirstOrDefault(a => a.Nome.Equals(nome));
         }
     }
 }
