@@ -1,41 +1,8 @@
-﻿using Microsoft.Data.SqlClient;
-using ScreenSound.Banco;
+﻿using ScreenSound.Banco;
 using ScreenSound.Menus;
-using ScreenSound.Modelos;
 
-try
-{
-    var contexto = new ScreenSoundContext();
-    var artistaDAL = new ArtistaDAL(contexto);
-
-    //var novoArtista = new Artista("Lana Del Rey", "Cantora Lana Del Rey", "lana-del-rey.jpg");
-
-    //artistaDAL.Adicionar(novoArtista);
-
-    //var artistas = artistaDAL.Listar();
-
-    //foreach (var artista in artistas)
-    //{
-    //    Console.WriteLine($"Id: {artista.Id} - Nome: {artista.Nome}");
-    //}
-
-    Console.WriteLine(artistaDAL.RecuperarPeloNome("Lana Del Rey"));
-    Console.WriteLine(artistaDAL.RecuperarPeloNome("Lady Gaga"));
-}
-catch (Exception ex)
-{
-    Console.WriteLine($"Erro ao conectar ao banco de dados: {ex.Message}");
-    throw;
-}
-
-return;
-
-Artista ira = new Artista("Ira!", "Banda Ira!", "banda-ira.jpg");
-Artista beatles = new("The Beatles", "Banda The Beatles", "the-beatles.jpg");
-
-Dictionary<string, Artista> artistasRegistrados = new();
-artistasRegistrados.Add(ira.Nome, ira);
-artistasRegistrados.Add(beatles.Nome, beatles);
+var contexto = new ScreenSoundContext();
+var artistaDAL = new ArtistaDAL(contexto);
 
 Dictionary<int, Menu> opcoes = new();
 opcoes.Add(1, new MenuRegistrarArtista());
@@ -74,7 +41,7 @@ void ExibirOpcoesDoMenu()
     if (opcoes.ContainsKey(opcaoEscolhidaNumerica))
     {
         Menu menuASerExibido = opcoes[opcaoEscolhidaNumerica];
-        menuASerExibido.Executar(artistasRegistrados);
+        menuASerExibido.Executar(artistaDAL);
         if (opcaoEscolhidaNumerica > 0) ExibirOpcoesDoMenu();
     } 
     else
